@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - KYC/KYB Exchange</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Dashboard</h1>
+            <button id="logout-btn">Logout</button>
+        </header>
+        
+        <div id="user-info">
+            <h2>User Information</h2>
+            <div id="user-details"></div>
+        </div>
+        
+        <div id="verification-status">
+            <h2>Verification Status</h2>
+            <div id="status-details"></div>
+        </div>
+        
+        <div id="investor-dashboard" style="display: none;">
+            <h2>Investor Dashboard</h2>
+            <p>Welcome to your investor dashboard. Browse available business tokens to invest in.</p>
+            <button onclick="viewBusinessTokens()">View Available Tokens</button>
+        </div>
+        
+        <div id="business-dashboard" style="display: none;">
+            <h2>Business Dashboard</h2>
+            <p>Welcome to your business dashboard. Manage your token and track investments.</p>
+            <button onclick="createToken()">Create Your Business Token</button>
+            <button onclick="viewInvestments()">View Investments</button>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const token = localStorage.getItem('access_token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Fetch user data
+            fetchUserData(token);
+            
+            // Logout button
+            document.getElementById('logout-btn').addEventListener('click', function() {
+                localStorage.removeItem('access_token');
+                window.location.href = 'index.html';
+            });
+        });
+        
+        async function fetchUserData(token) {
+            try {
+                const response = await fetch('http://localhost:8000/users/me', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch user data');
+                }
+                
+                const user = await response.json();
+                document.getElementById('user-details').innerHTML = `
+                    <p><strong>Email:</strong> ${user.email}</p>
+                    <p><strong>User Type:</strong> ${user.user_type}</p>
+                    <p><strong>Status:</strong> ${user.is_verified ? 'Verified' : 'Pending Verification'}</p>
+                `;
+                
+                // Show appropriate dashboard
+                if (user.user_type === 'investor') {
+                    document.getElementById('investor-dashboard').style.display = 'block';
+                    // Fetch investor details
+                    fetchInvestorData(token, user.id);
+                } else if (user.user_type === 'business') {
+                    document.getElementById('business-dashboard').style.display = 'block';
+                    // Fetch business details
+                    fetchBusinessData(token, user.id);
+                }
+                
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+        
+        async function fetchInvestorData(token, userId) {
+            try {
+                const response = await fetch(`http://localhost:8000/investor/${userId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const investor = await response.json();
+                    document.getElementById('status-details').innerHTML = `
+                        <p><strong>Verification Status:</strong> ${investor.verification_status}</p>
+                        ${investor.rejection_reason ? `<p><strong>Rejection Reason:</strong> ${investor.rejection_reason}</p>` : ''}
+                    `;
+                }
+            } catch (error) {
+                console.error('Error fetching investor data:', error);
+            }
+        }
+        
+        async function fetchBusinessData(token, userId) {
+            try {
+                const response = await fetch(`http://localhost:8000/business/${userId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const business = await response.json();
+                    document.getElementById('status-details').innerHTML = `
+                        <p><strong>Verification Status:</strong> ${business.verification_status}</p>
+                        ${business.rejection_reason ? `<p><strong>Rejection Reason:</strong> ${business.rejection_reason}</p>` : ''}
+                    `;
+                }
+            } catch (error) {
+                console.error('Error fetching business data:', error);
+            }
+        }
+        
+        function viewBusinessTokens() {
+            alert('This feature will be implemented soon!');
+        }
+        
+        function createToken() {
+            alert('This feature will be implemented soon!');
+        }
+        
+        function viewInvestments() {
+            alert('This feature will be implemented soon!');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Создать</h1>
+        
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('investor')">Инвестор</button>
+            <button class="tab-button" onclick="showTab('business')">Бизнес</button>
+        </div>
+        
+        <div id="investor-tab" class="tab-content active">
+            <form id="investor-form" enctype="multipart/form-data">
+                <h2>Инвестор</h2>
+                
+                <div class="form-group">
+                    <label for="investor-email">Email:</label>
+                    <input type="email" id="investor-email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="investor-password">Пароль:</label>
+                    <input type="password" id="investor-password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="investor-first-name">Имя:</label>
+                    <input type="text" id="investor-first-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="investor-last-name">Фамилия:</label>
+                    <input type="text" id="investor-last-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="investor-dob">Датаа рождения:</label>
+                    <input type="date" id="investor-dob" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="investor-phone">Телефон:</label>
+                    <input type="tel" id="investor-phone" placeholder="+7XXXXXXXXXX" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="investor-id-type">Документ:</label>
+                    <select id="investor-id-type" required>
+                        <option value="passport">Паспорт</option>
+                        <option value="id_card">УДО</option>
+                        <option value="driving_license">Водительское удо</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="investor-id-number">Номер документа:</label>
+                    <input type="text" id="investor-id-number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="investor-address">Адрес:</label>
+                    <textarea id="investor-address" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="investor-tax-number">Номер налогоплательщика:</label>
+                    <input type="text" id="investor-tax-number">
+                </div>
+                
+                <div class="form-group">
+                    <label for="investor-id-front">Документ спереди:</label>
+                    <input type="file" id="investor-id-front" accept="image/*" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="investor-id-back">Документ сзади:</label>
+                    <input type="file" id="investor-id-back" accept="image/*" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="investor-selfie">Фото с документом:</label>
+                    <input type="file" id="investor-selfie" accept="image/*" required>
+                </div>
+                
+                <button type="submit">Зарегестрироваться как инвестор</button>
+            </form>
+        </div>
+        
+        <div id="business-tab" class="tab-content">
+            <form id="business-form" enctype="multipart/form-data">
+                <h2>Бизнес</h2>
+                
+                <div class="form-group">
+                    <label for="business-email">Email:</label>
+                    <input type="email" id="business-email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="business-password">Пароль:</label>
+                    <input type="password" id="business-password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="company-name">Имя компании:</label>
+                    <input type="text" id="company-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registration-number">Номер регистрации:</label>
+                    <input type="text" id="registration-number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registration-date">Дата регистрации:</label>
+                    <input type="date" id="registration-date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tax-number">Номер налогоплательщика:</label>
+                    <input type="text" id="tax-number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="legal-address">Адрес:</label>
+                    <textarea id="legal-address" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="physical-address">Физический адрес:</label>
+                    <textarea id="physical-address" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="business-type">Тип бизнеса:</label>
+                    <select id="business-type" required>
+                        <option value="llc">LLC</option>
+                        <option value="sole_proprietorship">ИП</option>
+                        <option value="joint_stock">ТОО</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="industry">Сфера:</label>
+                    <input type="text" id="industry" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="director-first-name">Имя директора:</label>
+                    <input type="text" id="director-first-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="director-last-name">Фамилия директора:</label>
+                    <input type="text" id="director-last-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="director-dob">Дата рождения директора:</label>
+                    <input type="date" id="director-dob" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="director-id-number">Директор иин:</label>
+                    <input type="text" id="director-id-number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="business-phone">нОМРЕ:</label>
+                    <input type="tel" id="business-phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="business-email-2">Email компании:</label>
+                    <input type="email" id="business-email-2" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ownership-structure">Струкутра собственности:</label>
+                    <textarea id="ownership-structure"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="website">Вебсайт (опционально):</label>
+                    <input type="url" id="website">
+                </div>
+                
+                <div class="form-group">
+                    <label for="director-id-document">Идентификационный документ директора:</label>
+                    <input type="file" id="director-id-document" accept="image/*" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="director-selfie">Фото с документом:</label>
+                    <input type="file" id="director-selfie" accept="image/*" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registration-certificate">Сертификат компании:</label>
+                    <input type="file" id="registration-certificate" accept="image/*,.pdf" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tax-certificate">Свидетельство о налоговой регистрации:</label>
+                    <input type="file" id="tax-certificate" accept="image/*,.pdf" required>
+                </div>
+                
+                <button type="submit">Зарегестрироваться как бизнес</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
